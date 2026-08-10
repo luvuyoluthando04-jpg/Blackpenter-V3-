@@ -77,3 +77,57 @@
 
 </body>
 </html>
+</body>
+<section class="scanner">
+  <h2>📊 Chart Scanner</h2>
+
+  <p>Upload a chart for analysis</p>
+
+  <input type="file" id="chartInput" accept="image/*">
+
+  <div id="chartPreview"></div>
+
+  <button onclick="analyzeChart()">🔍 Analyze Chart</button>
+
+  <div id="result">
+    <h3>Analysis Result</h3>
+    <p id="signal">Waiting for chart...</p>
+  </div>
+
+  <div class="demo">
+    <h3>🧪 Demo Trading</h3>
+    <button onclick="demoTrade('BUY')">BUY — DEMO</button>
+    <button onclick="demoTrade('SELL')">SELL — DEMO</button>
+    <p id="tradeStatus">No demo trade executed.</p>
+  </div>
+</section>
+
+<script>
+const chartInput = document.getElementById("chartInput");
+
+chartInput.addEventListener("change", function () {
+  const file = this.files[0];
+  if (!file) return;
+
+  const preview = document.getElementById("chartPreview");
+  preview.innerHTML = "";
+
+  const img = document.createElement("img");
+  img.src = URL.createObjectURL(file);
+  img.style.maxWidth = "100%";
+  img.style.marginTop = "15px";
+  img.style.borderRadius = "10px";
+
+  preview.appendChild(img);
+});
+
+function analyzeChart() {
+  document.getElementById("signal").textContent =
+    "Chart received. Scanner analysis will be added next.";
+}
+
+function demoTrade(type) {
+  document.getElementById("tradeStatus").textContent =
+    type + " demo trade executed — NO REAL MONEY.";
+}
+</script>
